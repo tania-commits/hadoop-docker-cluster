@@ -1,47 +1,26 @@
 version: '3'
 services:
   namenode:
-    image: adbgonzalez/hadoop:test
-    container_name: namenode
-    hostname: namenode
-    ports:
-      - "10071:50070"
-      - "9000:9000"
-      - "9870:9870"
-    networks:
-      - hadoop
+    image: hadoop #Substituir
+    # TODO
     volumes:
-      - namenode_data:/home/hadoop/namenode
+      # TODO
       - ./start-dfs.sh:/start-dfs.sh
     command: /bin/bash /start-dfs.sh 
 
 
   datanode:
-    image: adbgonzalez/hadoop:test
-    container_name: datanode
-    hostname: datanode
-    networks:
-      - hadoop
-    volumes:
-      - datanode_data:/home/hadoop/datanode/
+    image: hadoop #Substituir
+    # TODO
     command: hdfs datanode
 
   resourcemanager:
-    image: adbgonzalez/hadoop:test
-    container_name: resourcemanager
-    hostname: resourcemanager
-    ports:
-      - "8088:8088"
-    networks:
-      - hadoop
+    image: hadoop #Substituir
+    # TODO
     command: yarn resourcemanager
 
   nodemanager:
-    image: adbgonzalez/hadoop:test
-    container_name: nodemanager
-    hostname: nodemanager
-    networks:
-      - hadoop
+    # TODO
     command: yarn nodemanager
 
 networks:

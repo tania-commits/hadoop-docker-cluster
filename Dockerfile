@@ -14,7 +14,7 @@ RUN groupadd --gid 1000 hadoop && \
 # Especificamos o directorio de traballo (/home/hadoop)
 WORKDIR /home/hadoop
 
-# Descargamos e descomprimos o https://downloads.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz
+# Descargamos e descomprimos o https://downloads.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION-lean.tar.gz
 # en /usr/local, renomeamos a /usr/local/hadoop
 #TODO
 

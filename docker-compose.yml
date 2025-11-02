@@ -1,26 +1,56 @@
 version: '3'
 services:
   namenode:
-    image: hadoop #Substituir
-    # TODO
+    image: myhadoop:3.4.2
+    container_name: namenode
+    hostname: namenode
+    restart: unless-stopped
+    networks:
+      - hadoop
+    ports:
+      - "9870:9870"
+      - "8020:8020"
+      - "22:22"
     volumes:
-      # TODO
+      - namenode_data:/home/hadoop/namenode
       - ./start-dfs.sh:/start-dfs.sh
-    command: /bin/bash /start-dfs.sh 
-
+    command: /bin/bash /start-dfs.sh
 
   datanode:
-    image: hadoop #Substituir
-    # TODO
+    image: myhadoop:3.4.2
+    container_name: datanode
+    hostname: datanode
+    restart: unless-stopped
+    networks:
+      - hadoop
+    depends_on:
+      - namenode
+    volumes:
+      - datanode_data:/home/hadoop/datanode
     command: hdfs datanode
 
   resourcemanager:
-    image: hadoop #Substituir
-    # TODO
+    image: myhadoop:3.4.2
+    container_name: resourcemanager
+    hostname: resourcemanager
+    restart: unless-stopped
+    networks:
+      - hadoop
+    depends_on:
+      - namenode
+    ports:
+      - "8088:8088"
     command: yarn resourcemanager
 
   nodemanager:
-    # TODO
+    image: myhadoop:3.4.2
+    container_name: nodemanager
+    hostname: nodemanager
+    restart: unless-stopped
+    networks:
+      - hadoop
+    depends_on:
+      - resourcemanager
     command: yarn nodemanager
 
 networks:
